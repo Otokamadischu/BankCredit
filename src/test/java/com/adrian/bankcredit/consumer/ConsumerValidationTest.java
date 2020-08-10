@@ -12,6 +12,8 @@ import javax.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
 
 class ConsumerValidationTest {
 
@@ -26,7 +28,7 @@ class ConsumerValidationTest {
     @Nested
 	class NameValidationTest{
     
-    	@Test //Testing null Name validation
+    	@Test //Test null Name validation
         public void testNameNullValidation() {
             Consumer consumer = new Consumer( 1L, null, "Le", 12312312312L);
 
@@ -38,7 +40,7 @@ class ConsumerValidationTest {
             		constraintViolations.iterator().next().getMessage());
         }
     	
-    	@Test //Testing less than 3 characters Name validation
+    	@Test //Test less than 3 characters Name validation
         public void testNameMinValidation() {
             Consumer consumer = new Consumer( 1L, "Ri", "Le", 12312312312L);
 
@@ -50,7 +52,7 @@ class ConsumerValidationTest {
             		constraintViolations.iterator().next().getMessage());
         }
     	
-    	@Test //Testing more than 100 characters Name validation
+    	@Test //Test more than 100 characters Name validation
         public void testNameMaxValidation() {
             Consumer consumer = new Consumer( 1L, "Richarddqwdqwdqwdqwdqwqdwqwdqwdqwdqwdqwdqwdqwdqwdqwdqwqwdqwdqwdqwdqwdqwdwqdqwdqwdqwdqwdqwdwqdqwdqwdwqdqwdqwdqwdqwdqwdqwdqwdqwdqwddqwdqwdqdqwwwwqwewqweqweqweqweqweqweqwe",
             		"Le", 12312312312L);
@@ -68,7 +70,7 @@ class ConsumerValidationTest {
     @Nested
 	class LastNameValidationTest{
     
-    	@Test //Testing LastName null validation
+    	@Test //Test LastName null validation
         public void testLastNameNullValidation() {
     		
             Consumer consumer = new Consumer( 1L, "Richard", null, 12312312312L);
@@ -81,7 +83,7 @@ class ConsumerValidationTest {
             		constraintViolations.iterator().next().getMessage());
         }
     	
-    	@Test //Testing less than 2 characters LastName validation
+    	@Test //Test less than 2 characters LastName validation
         public void testLastNameMinValidation() {
     		
             Consumer consumer = new Consumer( 1L, "Richard", "L", 12312312312L);
@@ -94,7 +96,7 @@ class ConsumerValidationTest {
             		constraintViolations.iterator().next().getMessage());
         }
     	
-    	@Test //Testing more than 100 characters LastName validation
+    	@Test //Test more than 100 characters LastName validation
         public void testLastNameMaxValidation() {
             Consumer consumer = new Consumer( 1L, "Richard", "Leeeeeeerddqwdqwdqwdqwdqwqdwqwdqwdqwdqwdqwdqwdqwdqwdqwdqwqwdqwdqwdqwdqwdqwdwqdqwdqwdqwdqwdqwdwqdqwdqwdwqdqwdqwdqwdqwdqwdqwdqwdqwdqwddqwdqwdqdqwwwwqwewqweqweqweqweqweqweqwe",
             		12312312312L);
@@ -112,7 +114,7 @@ class ConsumerValidationTest {
     @Nested
 	class PeselValidationTest{
     	
-    	@Test //Testing Pesel null validation
+    	@Test //Test Pesel null validation
         public void testPeselNullValidation() {
         	
             Consumer consumer = new Consumer( 1L, "Richard", "Le", null);
@@ -125,7 +127,7 @@ class ConsumerValidationTest {
             		constraintViolations.iterator().next().getMessage());
         }
     	
-    	@Test //Testing 1 digit Pesel validation
+    	@Test //Test 1 digit Pesel validation
         public void testPeselMinValidation() {
         	
             Consumer consumer = new Consumer( 1L, "Richard", "Le", 9L);
@@ -138,7 +140,7 @@ class ConsumerValidationTest {
             		constraintViolations.iterator().next().getMessage());
         }
     	
-    	@Test //Testing 13 digits Pesel validation
+    	@Test //Test 13 digits Pesel validation
         public void testPeselMaxValidation() {
         	
             Consumer consumer = new Consumer( 1L, "Richard", "Le", 9999999999999L);

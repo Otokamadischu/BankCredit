@@ -46,7 +46,7 @@ public class CreditDetails {
 	
 	@NotNull(message = "Customer cannot be null")
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "id", nullable = false)
+    @JoinColumn(name = "consumerId", nullable = false)
     Consumer consumer;
 	
 	
