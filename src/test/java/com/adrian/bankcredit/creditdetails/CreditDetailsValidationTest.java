@@ -17,6 +17,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.adrian.bankcredit.consumer.Consumer;
 import com.adrian.bankcredit.credit.Credit;
+import com.adrian.bankcredit.creditcard.CreditCard;
 
 @SpringBootTest
 class CreditDetailsValidationTest {
@@ -34,7 +35,8 @@ class CreditDetailsValidationTest {
     	
     	@Test //Test loanAmount null validation
         public void testLoanNullValidation() {
-            CreditDetails creditDetails = new CreditDetails(1L, null, new Date(), 21, "541234567890125", new Consumer(), new Credit());
+            CreditDetails creditDetails = new CreditDetails(1L, null, new Date(), 21, "541234567890125", new Consumer(),
+            		new Credit(), new CreditCard());
 
             Set<ConstraintViolation<CreditDetails>> constraintViolations =
                     validator.validate(creditDetails);
@@ -46,7 +48,8 @@ class CreditDetailsValidationTest {
     	
     	@Test //Test loanAmount less than 1,000 validation
         public void testLoanAmountMinValidation() {
-            CreditDetails creditDetails = new CreditDetails(1L, 999L, new Date(), 21, "541234567890125", new Consumer(), new Credit());
+            CreditDetails creditDetails = new CreditDetails(1L, 999L, new Date(), 21, "541234567890125", new Consumer(),
+            		new Credit(), new CreditCard());
 
             Set<ConstraintViolation<CreditDetails>> constraintViolations =
                     validator.validate(creditDetails);
@@ -58,7 +61,8 @@ class CreditDetailsValidationTest {
     	
     	@Test //Test loanAmount more than 100,000,000 validation
         public void testLoanAmountMaxValidation() {
-            CreditDetails creditDetails = new CreditDetails(1L, 9999999999L, new Date(), 21, "541234567890125", new Consumer(), new Credit());
+            CreditDetails creditDetails = new CreditDetails(1L, 9999999999L, new Date(), 21, "541234567890125", new Consumer(),
+            		new Credit(), new CreditCard());
 
             Set<ConstraintViolation<CreditDetails>> constraintViolations =
                     validator.validate(creditDetails);
@@ -74,7 +78,8 @@ class CreditDetailsValidationTest {
     	
     	@Test //Test loanStart null validation
     	public void testLoanStartNullValidation() {
-    		CreditDetails creditDetails = new CreditDetails(1L, 10000L, null, 21, "541234567890125", new Consumer(), new Credit());
+    		CreditDetails creditDetails = new CreditDetails(1L, 10000L, null, 21, "541234567890125", new Consumer(), 
+    				new Credit(), new CreditCard());
 
     		Set<ConstraintViolation<CreditDetails>> constraintViolations =
                     validator.validate(creditDetails);
@@ -90,7 +95,8 @@ class CreditDetailsValidationTest {
     	
     	@Test //Test Months less than 1 validation
         public void testMonthsMinValidation() {
-            CreditDetails creditDetails = new CreditDetails(1L, 9999L, new Date(), 0, "541234567890125", new Consumer(), new Credit());
+            CreditDetails creditDetails = new CreditDetails(1L, 9999L, new Date(), 0, "541234567890125", new Consumer(),
+            		new Credit(), new CreditCard());
 
             Set<ConstraintViolation<CreditDetails>> constraintViolations =
                     validator.validate(creditDetails);
@@ -102,7 +108,8 @@ class CreditDetailsValidationTest {
     	
     	@Test //Test loanAmount more than 720 validation
         public void testLoanAmountMaxValidation() {
-            CreditDetails creditDetails = new CreditDetails(1L, 9999L, new Date(), 400, "541234567890125", new Consumer(), new Credit());
+            CreditDetails creditDetails = new CreditDetails(1L, 9999L, new Date(), 400, "541234567890125", new Consumer(),
+            		new Credit(), new CreditCard());
 
             Set<ConstraintViolation<CreditDetails>> constraintViolations =
                     validator.validate(creditDetails);
@@ -118,7 +125,8 @@ class CreditDetailsValidationTest {
     	
     	@Test //Test CreditCardNumber single digit error validation
     	public void testCreditCardSingleDigitErrorValidation() {
-    		CreditDetails creditDetails = new CreditDetails(1L, 10000L, new Date(), 21, "441234567890125", new Consumer(), new Credit());
+    		CreditDetails creditDetails = new CreditDetails(1L, 10000L, new Date(), 21, "441234567890125", new Consumer(),
+    				new Credit(), new CreditCard());
 
     		Set<ConstraintViolation<CreditDetails>> constraintViolations =
                     validator.validate(creditDetails);
@@ -130,7 +138,8 @@ class CreditDetailsValidationTest {
     	
     	@Test //Test CreditCardNumber null validation
     	public void testCreditCardNullValidation() {
-    		CreditDetails creditDetails = new CreditDetails(1L, 10000L, new Date(), 21, null, new Consumer(), new Credit());
+    		CreditDetails creditDetails = new CreditDetails(1L, 10000L, new Date(), 21, null, new Consumer(),
+    				new Credit(), new CreditCard());
 
     		Set<ConstraintViolation<CreditDetails>> constraintViolations =
                     validator.validate(creditDetails);
@@ -146,7 +155,8 @@ class CreditDetailsValidationTest {
     	
     	@Test //Test CreditCardNumber single digit error validation
     	public void testCustomerNullValidation() {
-    		CreditDetails creditDetails = new CreditDetails(1L, 10000L, new Date(), 21, "541234567890125", null, new Credit());
+    		CreditDetails creditDetails = new CreditDetails(1L, 10000L, new Date(), 21, "541234567890125", null,
+    				new Credit(), new CreditCard());
 
     		Set<ConstraintViolation<CreditDetails>> constraintViolations =
                     validator.validate(creditDetails);

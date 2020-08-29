@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Max;
@@ -23,6 +24,7 @@ import org.hibernate.validator.constraints.CreditCardNumber;
 
 import com.adrian.bankcredit.consumer.Consumer;
 import com.adrian.bankcredit.credit.Credit;
+import com.adrian.bankcredit.creditcard.CreditCard;
 import com.adrian.bankcredit.installment.Installment;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -65,9 +67,16 @@ public class CreditDetails {
 	@JsonIgnore
 	Set<Installment> installment;
 	
+	@NotNull(message = "CreditCard cannot be null")
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "creditCardId", referencedColumnName = "id")
+	CreditCard creditCard;
+	
 	
 	public CreditDetails() {}
 
+	
+	
 
 	public CreditDetails(Long id,
 			@NotNull(message = "LoanAmount cannot be null") @Min(value = 1000, message = "LoanAmount must be more than 1,000") @Max(value = 100000000, message = "LoanAmount must be less than 100,000,000") Long loanAmount,
@@ -75,7 +84,7 @@ public class CreditDetails {
 			@Min(value = 1, message = "Months must be more than 0") @Max(value = 720, message = "Months must be less than 721") int months,
 			@NotNull(message = "CreditCardNumber cannot be null") @CreditCardNumber(message = "CreditAccountNumber is wrong") String creditAccountNumber,
 			@NotNull(message = "Consumer cannot be null") Consumer consumer,
-			@NotNull(message = "Credit cannot be null") Credit credit) {
+			@NotNull(message = "Credit cannot be null") Credit credit, CreditCard creditCard) {
 		super();
 		this.id = id;
 		this.loanAmount = loanAmount;
@@ -84,7 +93,10 @@ public class CreditDetails {
 		this.creditAccountNumber = creditAccountNumber;
 		this.consumer = consumer;
 		this.credit = credit;
+		this.creditCard = creditCard;
 	}
+
+
 
 
 	public Long getId() {
@@ -157,6 +169,16 @@ public class CreditDetails {
 	}
 
 
+	public CreditCard getCreditCard() {
+		return creditCard;
+	}
+
+
+	public void setCreditCard(CreditCard creditCard) {
+		this.creditCard = creditCard;
+	}
+
+
 	public Set<Installment> getInstallment() {
 		return installment;
 	}
@@ -167,6 +189,8 @@ public class CreditDetails {
 	}
 
 
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -174,6 +198,7 @@ public class CreditDetails {
 		result = prime * result + ((consumer == null) ? 0 : consumer.hashCode());
 		result = prime * result + ((credit == null) ? 0 : credit.hashCode());
 		result = prime * result + ((creditAccountNumber == null) ? 0 : creditAccountNumber.hashCode());
+		result = prime * result + ((creditCard == null) ? 0 : creditCard.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((installment == null) ? 0 : installment.hashCode());
 		result = prime * result + ((loanAmount == null) ? 0 : loanAmount.hashCode());
@@ -181,6 +206,8 @@ public class CreditDetails {
 		result = prime * result + months;
 		return result;
 	}
+
+
 
 
 	@Override
@@ -206,6 +233,11 @@ public class CreditDetails {
 			if (other.creditAccountNumber != null)
 				return false;
 		} else if (!creditAccountNumber.equals(other.creditAccountNumber))
+			return false;
+		if (creditCard == null) {
+			if (other.creditCard != null)
+				return false;
+		} else if (!creditCard.equals(other.creditCard))
 			return false;
 		if (id == null) {
 			if (other.id != null)
@@ -233,5 +265,5 @@ public class CreditDetails {
 	}
 
 
-	
+
 }
