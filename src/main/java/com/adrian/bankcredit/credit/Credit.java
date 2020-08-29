@@ -24,7 +24,7 @@ public class Credit {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	Long id;
 	
-	@NotNull(message = "LoanAmount cannot be null")
+	@NotNull(message = "Name cannot be null")
 	String name;
 	
 	@Min(value=1, message="LoanMinDuration must be more than 0")
@@ -50,7 +50,7 @@ public class Credit {
 	@Max(value=100000000, message="MaxLoanAmount must be less than 100,000,000")
 	Long maxLoanAmount;
 
-	@OneToMany(mappedBy = "consumer", fetch = FetchType.LAZY,
+	@OneToMany(mappedBy = "credit", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
 	@JsonIgnore
 	Set<CreditDetails> creditsDetails;
@@ -59,7 +59,7 @@ public class Credit {
 		
 	}
 	
-	public Credit(Long id, @NotNull(message = "LoanAmount cannot be null") String name,
+	public Credit(Long id, @NotNull(message = "Name cannot be null") String name,
 			@Min(value = 1, message = "LoanMinDuration must be more than 0") @Max(value = 720, message = "LoanMinDuration must be less than 721") int loanMinDuration,
 			@Min(value = 1, message = "LoanMaxDuration must be more than 0") @Max(value = 720, message = "LoanMaxDuration must be less than 721") int loanMaxDuration,
 			@Min(value = 0, message = "Provision must be positive") @Max(value = 10000, message = "Provision must be less than 10001") double provision,
