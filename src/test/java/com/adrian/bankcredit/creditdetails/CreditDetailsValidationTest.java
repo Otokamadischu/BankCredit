@@ -99,7 +99,7 @@ class CreditDetailsValidationTest {
             		constraintViolations.iterator().next().getMessage());
         }
     	
-    	@Test //Test loanAmount more than 360 validation
+    	@Test //Test loanAmount more than 720 validation
         public void testLoanAmountMaxValidation() {
             CreditDetails creditDetails = new CreditDetails(1L, 9999L, new Date(), 400, "541234567890125", new Consumer());
 
@@ -107,7 +107,7 @@ class CreditDetailsValidationTest {
                     validator.validate(creditDetails);
 
             assertEquals(1, constraintViolations.size());
-            assertEquals("Months must be less than 361",
+            assertEquals("Months must be less than 721",
             		constraintViolations.iterator().next().getMessage());
         }
     }

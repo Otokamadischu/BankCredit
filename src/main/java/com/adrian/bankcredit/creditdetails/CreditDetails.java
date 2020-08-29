@@ -37,7 +37,7 @@ public class CreditDetails {
 	Date loanStart;
 
 	@Min(value=1, message="Months must be more than 0")
-	@Max(value=360, message="Months must be less than 361")
+	@Max(value=720, message="Months must be less than 721")
 	int months;
 	
 	@NotNull(message = "CreditCardNumber cannot be null")
