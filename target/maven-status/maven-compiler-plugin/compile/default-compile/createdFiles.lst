@@ -1,0 +1,10 @@
+com\adrian\bankcredit\consumer\ConsumerDtoAdvance.class
+com\adrian\bankcredit\consumer\ConsumerController.class
+com\adrian\bankcredit\consumer\Consumer.class
+com\adrian\bankcredit\consumer\ConsumerRepository.class
+com\adrian\bankcredit\creditdetails\CreditDetails.class
+com\adrian\bankcredit\consumer\ConsumerConverter.class
+com\adrian\bankcredit\BankCreditApplication.class
+com\adrian\bankcredit\consumer\ConsumerDto.class
+com\adrian\bankcredit\consumer\ConsumerService.class
+com\adrian\bankcredit\consumer\ConsumerServiceImpl.class

@@ -21,6 +21,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class Consumer {
 	
+	//Add login, pin, password.
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	Long id;

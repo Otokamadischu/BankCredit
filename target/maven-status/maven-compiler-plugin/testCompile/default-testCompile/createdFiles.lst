@@ -1,0 +1,17 @@
+com\adrian\bankcredit\creditdetails\CreditDetailsValidationTest$CreditCardNumberValidationTest.class
+com\adrian\bankcredit\consumer\ConsumerValidationTest$NameValidationTest.class
+com\adrian\bankcredit\consumer\ConsumerControllerTest.class
+com\adrian\bankcredit\consumer\ConsumerValidationTest$PeselValidationTest.class
+com\adrian\bankcredit\consumer\ConsumerServiceTest$FindAllTest.class
+com\adrian\bankcredit\consumer\ConsumerServiceTest$SaveTest.class
+com\adrian\bankcredit\creditdetails\CreditDetailsValidationTest$MonthsValidationTest.class
+com\adrian\bankcredit\consumer\ConsumerServiceTest$FindByIdTest.class
+com\adrian\bankcredit\consumer\ConsumerValidationTest$LastNameValidationTest.class
+com\adrian\bankcredit\creditdetails\CreditDetailsValidationTest$LoanStartValidationTest.class
+com\adrian\bankcredit\consumer\ConsumerServiceTest$DeleteTest.class
+com\adrian\bankcredit\consumer\ConsumerServiceTest.class
+com\adrian\bankcredit\creditdetails\CreditDetailsValidationTest$LoanAmountValidationTest.class
+com\adrian\bankcredit\creditdetails\CreditDetailsValidationTest.class
+com\adrian\bankcredit\consumer\ConsumerControllerTest$GetConsumerByIdTest.class
+com\adrian\bankcredit\consumer\ConsumerValidationTest.class
+com\adrian\bankcredit\creditdetails\CreditDetailsValidationTest$CustomerValidationTest.class
