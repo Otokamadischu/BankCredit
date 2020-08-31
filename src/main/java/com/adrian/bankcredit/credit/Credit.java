@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.adrian.bankcredit.creditdetails.CreditDetails;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -25,6 +26,7 @@ public class Credit {
 	Long id;
 	
 	@NotNull(message = "Name cannot be null")
+	@Size(min = 3, max = 100, message = "Name must be between 3 and 100 characters")
 	String name;
 	
 	@Min(value=1, message="LoanMinDuration must be more than 0")
@@ -49,6 +51,9 @@ public class Credit {
 	@Min(value=1000, message="MaxLoanAmount must be more than 1,000")
 	@Max(value=100000000, message="MaxLoanAmount must be less than 100,000,000")
 	Long maxLoanAmount;
+	
+	@NotNull(message = "CreditAvailable")
+	Boolean creditAvailable;
 
 	@OneToMany(mappedBy = "credit", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
