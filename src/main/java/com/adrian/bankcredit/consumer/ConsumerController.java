@@ -37,7 +37,7 @@ public class ConsumerController {
 		return consumerService.findById(id);
 	}
 	
-	@GetMapping("/bank/consumers")
+	@GetMapping("/bank/consumer")
 	public List<Consumer> getConsumers(){
 		return consumerService.findAll();
 	}
