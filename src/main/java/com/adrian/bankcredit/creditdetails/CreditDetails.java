@@ -48,10 +48,6 @@ public class CreditDetails {
 	@Max(value=720, message="Months must be less than 721")
 	int months;
 	
-	@NotNull(message = "CreditCardNumber cannot be null")
-	@CreditCardNumber(message = "CreditAccountNumber is wrong")
-	String creditAccountNumber;
-	
 	@NotNull(message = "Consumer cannot be null")
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "consumerId", nullable = false)
@@ -75,14 +71,11 @@ public class CreditDetails {
 	
 	public CreditDetails() {}
 
-	
-	
 
 	public CreditDetails(Long id,
 			@NotNull(message = "LoanAmount cannot be null") @Min(value = 1000, message = "LoanAmount must be more than 1,000") @Max(value = 100000000, message = "LoanAmount must be less than 100,000,000") Long loanAmount,
 			@NotNull(message = "LoanStart cannot be null") Date loanStart,
 			@Min(value = 1, message = "Months must be more than 0") @Max(value = 720, message = "Months must be less than 721") int months,
-			@NotNull(message = "CreditCardNumber cannot be null") @CreditCardNumber(message = "CreditAccountNumber is wrong") String creditAccountNumber,
 			@NotNull(message = "Consumer cannot be null") Consumer consumer,
 			@NotNull(message = "Credit cannot be null") Credit credit, CreditCard creditCard) {
 		super();
@@ -90,7 +83,6 @@ public class CreditDetails {
 		this.loanAmount = loanAmount;
 		this.loanStart = loanStart;
 		this.months = months;
-		this.creditAccountNumber = creditAccountNumber;
 		this.consumer = consumer;
 		this.credit = credit;
 		this.creditCard = creditCard;
@@ -136,16 +128,6 @@ public class CreditDetails {
 
 	public void setMonths(int months) {
 		this.months = months;
-	}
-
-
-	public String getCreditAccountNumber() {
-		return creditAccountNumber;
-	}
-
-
-	public void setCreditAccountNumber(String creditAccountNumber) {
-		this.creditAccountNumber = creditAccountNumber;
 	}
 
 
@@ -197,7 +179,6 @@ public class CreditDetails {
 		int result = 1;
 		result = prime * result + ((consumer == null) ? 0 : consumer.hashCode());
 		result = prime * result + ((credit == null) ? 0 : credit.hashCode());
-		result = prime * result + ((creditAccountNumber == null) ? 0 : creditAccountNumber.hashCode());
 		result = prime * result + ((creditCard == null) ? 0 : creditCard.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((installment == null) ? 0 : installment.hashCode());
@@ -228,11 +209,6 @@ public class CreditDetails {
 			if (other.credit != null)
 				return false;
 		} else if (!credit.equals(other.credit))
-			return false;
-		if (creditAccountNumber == null) {
-			if (other.creditAccountNumber != null)
-				return false;
-		} else if (!creditAccountNumber.equals(other.creditAccountNumber))
 			return false;
 		if (creditCard == null) {
 			if (other.creditCard != null)
