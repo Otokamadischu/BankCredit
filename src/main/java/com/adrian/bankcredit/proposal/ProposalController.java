@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,6 +33,11 @@ public class ProposalController {
 	@GetMapping("/bank/proposal/{id}")
 	public Optional<Proposal> getProposal(@PathVariable Long id){
 		return proposalService.findById(id);
+	}
+	
+	@GetMapping("/bank/proposal")
+	public List<Proposal> getAllProposals(){
+		return proposalService.findAll();
 	}
 	
 	@GetMapping("/bank/proposal/notchecked")
@@ -66,7 +72,7 @@ public class ProposalController {
 		return ResponseEntity.created(uri).build();
 	}
 	
-	@PutMapping("/bank/consumer/{id}")
+	@PutMapping("/bank/proposal/{id}")
 	public ResponseEntity<Void> updateProposal(@RequestBody Proposal proposal, @PathVariable Long id){
 		
 		Optional<Proposal> existProposal = proposalService.findById(id);
@@ -119,6 +125,11 @@ public class ProposalController {
 		        .toUri();
 	
 		return ResponseEntity.ok().location(uri).build();
+	}
+	
+	@DeleteMapping("/bank/proposal/{id}")
+	public void deleteProposal(@PathVariable Long id) {
+		proposalService.deleteById(id);
 	}
 
 }

@@ -15,6 +15,12 @@ public class ProposalServiceImpl implements ProposalService {
 		// TODO Auto-generated method stub
 		return proposalRepository.findById(id);
 	}
+	
+	@Override
+	public List<Proposal> findAll() {
+		// TODO Auto-generated method stub
+		return proposalRepository.findAll();
+	}
 
 	@Override
 	public List<Proposal> findAllByCheck(boolean check) {
@@ -47,7 +53,7 @@ public class ProposalServiceImpl implements ProposalService {
 	}	
 
 	@Override
-	public void delete(Long id) {
+	public void deleteById(Long id) {
 		// TODO Auto-generated method stub
 		proposalRepository.deleteById(id);
 	}
