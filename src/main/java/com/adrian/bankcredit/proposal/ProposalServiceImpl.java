@@ -33,11 +33,25 @@ public class ProposalServiceImpl implements ProposalService {
 		// TODO Auto-generated method stub
 		return proposalRepository.save(proposal);
 	}
+	
+	@Override
+	public void setCheck(boolean check, Long id) {
+		// TODO Auto-generated method stub
+		proposalRepository.setCheck(check, id);
+	}
+	
+	@Override
+	public void setVerify(boolean verify, Long id) {
+		// TODO Auto-generated method stub
+		proposalRepository.setVerify(verify, id);
+	}	
 
 	@Override
-	public void delete(long id) {
+	public void delete(Long id) {
 		// TODO Auto-generated method stub
 		proposalRepository.deleteById(id);
 	}
+
+
 
 }
