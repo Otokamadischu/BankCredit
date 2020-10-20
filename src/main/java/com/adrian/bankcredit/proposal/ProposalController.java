@@ -13,17 +13,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.adrian.bankcredit.consumer.Consumer;
 import com.adrian.bankcredit.consumer.ConsumerService;
 
+@RestController
 public class ProposalController {
-	/*
-	 * 	List<Proposal> findAllNotChecked();
-	List<Proposal> findAllCheckedAndNotVerified();
-	List<Proposal> findAllCheckedAndVerified();
-	 */
+	
+	
 	@Autowired
 	ProposalService proposalService;
 	
@@ -42,6 +41,7 @@ public class ProposalController {
 	
 	@GetMapping("/bank/proposal/notchecked")
 	public List<Proposal> getAllNotChecked(){
+
 		return proposalService.findAllByCheck(false);
 	}
 	
@@ -56,7 +56,9 @@ public class ProposalController {
 	}
 
 	@PostMapping("/bank/proposal")
-	public ResponseEntity<Void> createProposal(@RequestBody Proposal proposal, @RequestParam String creditName, @RequestParam Long consumerId){
+	public ResponseEntity<Void> createProposal(@RequestBody Proposal proposal, 
+											@RequestParam String creditName,
+											@RequestParam Long consumerId){
 		
 		Optional<Consumer> consumer = consumerService.findById(consumerId);
 		if(!consumer.isPresent()) {
@@ -66,7 +68,8 @@ public class ProposalController {
 		proposal.setConsumer(consumerToEntity);
 		proposalService.save(proposal);
 		
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(proposal.getId())
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").
+				buildAndExpand(proposal.getId())
 		        .toUri();
 	
 		return ResponseEntity.created(uri).build();
@@ -94,7 +97,7 @@ public class ProposalController {
 	}
 	
 	@PutMapping("/bank/proposal/{id}/check")
-	public ResponseEntity<Void> setCheck(@PathVariable Long id, boolean check){
+	public ResponseEntity<Void> setCheck(@PathVariable Long id, @RequestParam boolean check){
 		
 		Optional<Proposal> existProposal = proposalService.findById(id);
 		
@@ -111,7 +114,7 @@ public class ProposalController {
 	}
 	
 	@PutMapping("/bank/proposal/{id}/verify")
-	public ResponseEntity<Void> setVerify(@PathVariable Long id, boolean verify){
+	public ResponseEntity<Void> setVerify(@PathVariable Long id, @RequestParam boolean verify){
 		
 		Optional<Proposal> existProposal = proposalService.findById(id);
 		

@@ -11,8 +11,8 @@ public interface ProposalService {
 	List<Proposal> findAllByCheck(boolean check);
 	List<Proposal> findAllByCheckAndVerify(boolean check, boolean verify);
 	Proposal save(Proposal proposal);
-	void setCheck(boolean check, Long id);
-	void setVerify(boolean verify, Long id);
+	void setCheck(Boolean check, Long id);
+	void setVerify(Boolean verify, Long id);
 	void deleteById(Long id);
 
 }

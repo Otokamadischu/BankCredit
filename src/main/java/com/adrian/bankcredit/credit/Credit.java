@@ -16,6 +16,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.adrian.bankcredit.creditdetails.CreditDetails;
+import com.adrian.bankcredit.proposal.Proposal;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -59,6 +60,11 @@ public class Credit {
             cascade = CascadeType.ALL)
 	@JsonIgnore
 	Set<CreditDetails> creditsDetails;
+	
+	@OneToMany(mappedBy = "credit", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+	@JsonIgnore
+	Set<Proposal> proposals;
 	
 	public Credit() {
 		
@@ -136,10 +142,35 @@ public class Credit {
 		this.maxLoanAmount = maxLoanAmount;
 	}
 
+	public Boolean getCreditAvailable() {
+		return creditAvailable;
+	}
+
+	public void setCreditAvailable(Boolean creditAvailable) {
+		this.creditAvailable = creditAvailable;
+	}
+
+	public Set<CreditDetails> getCreditsDetails() {
+		return creditsDetails;
+	}
+
+	public void setCreditsDetails(Set<CreditDetails> creditsDetails) {
+		this.creditsDetails = creditsDetails;
+	}
+
+	public Set<Proposal> getProposals() {
+		return proposals;
+	}
+
+	public void setProposals(Set<Proposal> proposals) {
+		this.proposals = proposals;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((creditAvailable == null) ? 0 : creditAvailable.hashCode());
 		result = prime * result + ((creditsDetails == null) ? 0 : creditsDetails.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + loanMaxDuration;
@@ -147,6 +178,7 @@ public class Credit {
 		result = prime * result + ((maxLoanAmount == null) ? 0 : maxLoanAmount.hashCode());
 		result = prime * result + ((minLoanAmount == null) ? 0 : minLoanAmount.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((proposals == null) ? 0 : proposals.hashCode());
 		long temp;
 		temp = Double.doubleToLongBits(provision);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
@@ -162,6 +194,11 @@ public class Credit {
 		if (getClass() != obj.getClass())
 			return false;
 		Credit other = (Credit) obj;
+		if (creditAvailable == null) {
+			if (other.creditAvailable != null)
+				return false;
+		} else if (!creditAvailable.equals(other.creditAvailable))
+			return false;
 		if (creditsDetails == null) {
 			if (other.creditsDetails != null)
 				return false;
@@ -191,11 +228,15 @@ public class Credit {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
+		if (proposals == null) {
+			if (other.proposals != null)
+				return false;
+		} else if (!proposals.equals(other.proposals))
+			return false;
 		if (Double.doubleToLongBits(provision) != Double.doubleToLongBits(other.provision))
 			return false;
 		return true;
 	}
-	
-	
 
+	
 }

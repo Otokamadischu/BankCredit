@@ -2,6 +2,7 @@ package com.adrian.bankcredit.proposal;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -17,6 +18,7 @@ import javax.validation.constraints.NotNull;
 
 import com.adrian.bankcredit.consumer.Consumer;
 import com.adrian.bankcredit.credit.Credit;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Proposal {
@@ -38,18 +40,22 @@ public class Proposal {
 	@Max(value=720, message="Months must be less than 721")
 	int months;
 	
-	boolean check;
+	@Column(nullable = false, columnDefinition = "TINYINT(1)")
+	boolean checked;
 	
+	@Column(nullable = false, columnDefinition = "TINYINT(1)")
 	boolean verify;
 	
 	@NotNull(message = "Consumer cannot be null")
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "consumerId", nullable = false)
+	@JsonIgnore
     Consumer consumer;
 	
 	@NotNull(message = "Credit cannot be null")
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "creditId", nullable = false)
+	@JsonIgnore
     Credit credit;
 	
 	public Proposal() {}
@@ -58,14 +64,14 @@ public class Proposal {
 			@NotNull(message = "LoanAmount cannot be null") @Min(value = 1000, message = "LoanAmount must be more than 1,000") @Max(value = 100000000, message = "LoanAmount must be less than 100,000,000") Long loanAmount,
 			@NotNull(message = "LoanStart cannot be null") Date loanStart,
 			@Min(value = 1, message = "Months must be more than 0") @Max(value = 720, message = "Months must be less than 721") int months,
-			boolean check, boolean verify, @NotNull(message = "Consumer cannot be null") Consumer consumer,
+			boolean checked, boolean verify, @NotNull(message = "Consumer cannot be null") Consumer consumer,
 			@NotNull(message = "Credit cannot be null") Credit credit) {
 		super();
 		this.id = id;
 		this.loanAmount = loanAmount;
 		this.loanStart = loanStart;
 		this.months = months;
-		this.check = check;
+		this.checked = checked;
 		this.verify = verify;
 		this.consumer = consumer;
 		this.credit = credit;
@@ -103,12 +109,12 @@ public class Proposal {
 		this.months = months;
 	}
 
-	public boolean isCheck() {
-		return check;
+	public boolean isChecked() {
+		return checked;
 	}
 
-	public void setCheck(boolean check) {
-		this.check = check;
+	public void setCheck(boolean checked) {
+		this.checked = checked;
 	}
 
 	public boolean isVerify() {
@@ -139,7 +145,7 @@ public class Proposal {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + (check ? 1231 : 1237);
+		result = prime * result + (checked ? 1231 : 1237);
 		result = prime * result + ((consumer == null) ? 0 : consumer.hashCode());
 		result = prime * result + ((credit == null) ? 0 : credit.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
@@ -159,7 +165,7 @@ public class Proposal {
 		if (getClass() != obj.getClass())
 			return false;
 		Proposal other = (Proposal) obj;
-		if (check != other.check)
+		if (checked != other.checked)
 			return false;
 		if (consumer == null) {
 			if (other.consumer != null)
@@ -192,10 +198,6 @@ public class Proposal {
 			return false;
 		return true;
 	}
-	
-	
-	
-	
-	
+
 	
 }

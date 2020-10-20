@@ -3,16 +3,18 @@ package com.adrian.bankcredit.consumer;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ConsumerServiceImpl implements ConsumerService {
 	
+	@Autowired
 	private ConsumerRepository consumerRepository;
-
-	public ConsumerServiceImpl(ConsumerRepository consumerRepository) {
-		this.consumerRepository = consumerRepository;
-	}
+	
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 	@Override
 	public Optional<Consumer> findById(Long id) {
@@ -22,19 +24,19 @@ public class ConsumerServiceImpl implements ConsumerService {
 
 	@Override
 	public List<Consumer> findAll() {
-		// TODO Auto-generated method stub
 		return (List<Consumer>) consumerRepository.findAll();
 	}
 
 	@Override
 	public Consumer save(Consumer consumer) {
-		// TODO Auto-generated method stub
+		
+		consumer.setPassword(bCryptPasswordEncoder.encode(consumer.getPassword()));
+		consumer.setActive(true);
 		return consumerRepository.save(consumer);
 	}
 
 	@Override
 	public void deleteById(Long id) {
-		// TODO Auto-generated method stub
 		consumerRepository.deleteById(id);
 	}
 

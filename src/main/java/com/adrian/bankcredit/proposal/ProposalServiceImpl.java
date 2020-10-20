@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ProposalServiceImpl implements ProposalService {
 	
 	@Autowired
@@ -25,13 +27,13 @@ public class ProposalServiceImpl implements ProposalService {
 	@Override
 	public List<Proposal> findAllByCheck(boolean check) {
 		// TODO Auto-generated method stub
-		return proposalRepository.findByCheck(check);
+		return proposalRepository.findByChecked(check);
 	}
 
 	@Override
 	public List<Proposal> findAllByCheckAndVerify(boolean check, boolean verify) {
 		// TODO Auto-generated method stub
-		return proposalRepository.findByCheckAndVerify(check, verify);
+		return proposalRepository.findByCheckedAndVerify(check, verify);
 	}
 
 	@Override
@@ -41,13 +43,13 @@ public class ProposalServiceImpl implements ProposalService {
 	}
 	
 	@Override
-	public void setCheck(boolean check, Long id) {
+	public void setCheck(Boolean check, Long id) {
 		// TODO Auto-generated method stub
-		proposalRepository.setCheck(check, id);
+		proposalRepository.setChecked(check, id);
 	}
 	
 	@Override
-	public void setVerify(boolean verify, Long id) {
+	public void setVerify(Boolean verify, Long id) {
 		// TODO Auto-generated method stub
 		proposalRepository.setVerify(verify, id);
 	}	

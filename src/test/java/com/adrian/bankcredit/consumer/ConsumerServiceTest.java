@@ -30,13 +30,15 @@ class ConsumerServiceTest {
 		
 		@Test
 		public void testFindById() {
-			Consumer consumer = new Consumer(1L, "Richard", "Le", 12345678901L);
+			Consumer consumer = new Consumer(1L, "login", "password", "USER", 
+										"Richard", "Le", 12345678901L, true);
 			doReturn(Optional.of(consumer)).when(consumerRepository).findById(1L);
 			
 			Optional<Consumer> returnedConsumer = consumerService.findById(1L);
 			
 			assertTrue(returnedConsumer.isPresent(), "Consumer was not found");
-			assertSame(returnedConsumer.get(), consumer, "The consumer returned was not the same as the mock");
+			assertSame(returnedConsumer.get(), consumer, "The consumer returned "
+					+ "	was not the same as the mock");
 		}
 		
 		@Test
@@ -54,8 +56,10 @@ class ConsumerServiceTest {
 		
 		@Test
 		public void testFindAll() {
-			Consumer consumer1 = new Consumer(1L, "Richard", "Le", 12345678901L);
-			Consumer consumer2 = new Consumer(2L, "Richard", "Le", 12345678902L);
+			Consumer consumer1 = new Consumer(1L, "login", "password",
+						"USER", "Richard", "Le", 12345678901L, true);
+			Consumer consumer2 = new Consumer(2L, "login", "password",
+						"USER", "Richard", "Le", 12345678902L, true);
 			List<Consumer> consumerList = new ArrayList<>();
 			consumerList.add(consumer1);
 			consumerList.add(consumer2);
@@ -74,7 +78,7 @@ class ConsumerServiceTest {
 		
 		@Test
 		public void testSave() {
-			Consumer consumer = new Consumer(1L, "Richard", "Le", 12345678901L);
+			Consumer consumer = new Consumer(1L, "login", "password", "USER", "Richard", "Le", 12345678901L, true);
 			doReturn(consumer).when(consumerRepository).save(any(Consumer.class));
 			
 			Consumer returnedConsumer = consumerService.save(consumer);

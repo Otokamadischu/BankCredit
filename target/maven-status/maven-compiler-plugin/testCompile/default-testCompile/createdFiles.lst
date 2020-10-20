@@ -1,4 +1,3 @@
-com\adrian\bankcredit\creditdetails\CreditDetailsValidationTest$CreditCardNumberValidationTest.class
 com\adrian\bankcredit\consumer\ConsumerValidationTest$NameValidationTest.class
 com\adrian\bankcredit\consumer\ConsumerControllerTest.class
 com\adrian\bankcredit\consumer\ConsumerValidationTest$PeselValidationTest.class

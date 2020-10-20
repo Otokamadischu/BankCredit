@@ -35,7 +35,8 @@ class ConsumerControllerTest {
 		@Test
 	    public void testGetConsumerById() throws Exception {
 	        
-			Consumer consumer = new Consumer(1L, "Richard", "Le", 12345678901L);
+			Consumer consumer = new Consumer(1L, "login", "password", "USER",
+										"Richard", "Le", 12345678901L, true);
 	        doReturn(Optional.of(consumer)).when(consumerService).findById(1l);
 	
 	        mockMvc.perform(get("/bank/consumer/{id}", 1L))

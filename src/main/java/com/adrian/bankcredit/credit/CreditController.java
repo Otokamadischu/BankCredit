@@ -12,15 +12,18 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.adrian.bankcredit.consumer.Consumer;
+
+
 
 public class CreditController {
 
 	@Autowired
 	CreditService creditService;
+	
 	
 	@GetMapping("/bank/credit/{id}")
 	public Optional<Credit> getCredit(@PathVariable Long id){
@@ -40,8 +43,8 @@ public class CreditController {
 	}
 	
 	@PostMapping("/bank/credit")
-	public ResponseEntity<Void> createConsumer(@RequestBody Credit credit){
-		
+	public ResponseEntity<Void> createCredit(@RequestBody Credit credit){
+
 		creditService.save(credit);
 		
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(credit.getId())

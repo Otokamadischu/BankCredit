@@ -44,6 +44,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	}
 	
 	@Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable().authorizeRequests().anyRequest().permitAll();
+    }
+	
+	/*@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		
 		http.authorizeRequests()
@@ -53,21 +58,27 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.GET, "/bank/proposal/notverified").hasAnyAuthority("EMPLOYEE","ADMIN")
 				.antMatchers(HttpMethod.GET, "/bank/proposal/verified").hasAnyAuthority("EMPLOYEE","ADMIN")
 				.antMatchers(HttpMethod.POST, "/bank/proposal").hasAnyAuthority("USER","EMPLOYEE","ADMIN")
-				.antMatchers(HttpMethod.PUT, "/bank/proposal/{id:\\\\d+}").hasAnyAuthority("EMPLOYEE","ADMIN")
-				.antMatchers(HttpMethod.PUT, "/bank/proposal/{id:\\\\d+}/check").hasAnyAuthority("EMPLOYEE","ADMIN")
-				.antMatchers(HttpMethod.PUT, "/bank/proposal/{id:\\\\d+}/verify").hasAnyAuthority("ADMIN")
-				.antMatchers(HttpMethod.DELETE, "/bank/proposal/{id:\\\\d+}").hasAnyAuthority("EMPLOYEE","ADMIN")
+				.antMatchers(HttpMethod.PUT, "/bank/proposal/{id:\\d+}").hasAnyAuthority("EMPLOYEE","ADMIN")
+				.antMatchers(HttpMethod.PUT, "/bank/proposal/{id:\\d+}/check").hasAnyAuthority("EMPLOYEE","ADMIN")
+				.antMatchers(HttpMethod.PUT, "/bank/proposal/{id:\\d+}/verify").hasAnyAuthority("ADMIN")
+				.antMatchers(HttpMethod.DELETE, "/bank/proposal/{id:\\d+}").hasAnyAuthority("EMPLOYEE","ADMIN")
+				.antMatchers(HttpMethod.POST, "bank/consumer").permitAll()
+				.antMatchers(HttpMethod.POST, "/bank/creditdetails").hasAnyAuthority("ADMIN","EMPLOYEE")
+				.antMatchers(HttpMethod.PUT, "/bank/creditcard/{id:\\d+}/usemoney").hasAuthority("ADMIN")
+				.antMatchers(HttpMethod.PUT, "/bank/creditcard/{id:\\d+}/addmoney").hasAuthority("ADMIN")
+				.antMatchers(HttpMethod.PUT, "/bank/bankresources/{id:\\d+}/usemoney").hasAuthority("ADMIN")
+				.antMatchers(HttpMethod.PUT, "/bank/bankresources/{id:\\d+}/addmoney").hasAuthority("ADMIN")
 				
 				.anyRequest().authenticated()
 				.and().formLogin()
-				.loginPage("/login")
+				//.loginPage("/login")
 				.failureUrl("/login?error=true")
 				.defaultSuccessUrl("/").usernameParameter("login")
 				.passwordParameter("password")
 				.and().logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
 				.logoutSuccessUrl("/")
 				.and().exceptionHandling().accessDeniedPage("/denied");
-	}
+	}*/
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
